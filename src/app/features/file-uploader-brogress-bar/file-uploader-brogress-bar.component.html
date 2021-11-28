@@ -1,0 +1,28 @@
+<div class="upload-file-container">
+    <section class="progress-bar" [hidden]="hideprogressBar">
+        <mat-progress-bar color="primary" mode="determinate" [value]="percentDone">
+        </mat-progress-bar>
+    </section>
+    <mat-card>
+        <mat-card-title>File Uploader</mat-card-title>
+        <mat-card-content>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>{{fileName}}</mat-label>
+                <ng-template #newFile>
+                    <mat-label>Choose file</mat-label>
+                </ng-template>
+                <input matInput disabled>
+                <button mat-icon-button matSuffix (click)="fileInput.click()">
+                    <mat-icon>attach_file</mat-icon>
+                </button>
+                <input hidden (change)="onSelectFile($event)" #fileInput multiple name="uploadfile" type="file" id="file">
+            </mat-form-field>
+            <section>
+                <image-preview *ngFor="let image of selectedFiles " [imagePath]="image.value"></image-preview>
+            </section>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="onUploadClick()">Upload</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
